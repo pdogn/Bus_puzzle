@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ade64c944d58bc64f92ff7d6a32b9149, type: 3}
+  m_Name: Booker Catalog
+  m_EditorClassIdentifier: 
+  bookerCatalog:
+  - bookerColor: 1
+    booker: {fileID: 6615616145099745036, guid: c46bd76c2acf6b44ba307b3cc27fcc86, type: 3}
+  - bookerColor: 2
+    booker: {fileID: 6615616145099745036, guid: 1d17ed1710c3f754db6529ad90469fe4, type: 3}
+  - bookerColor: 3
+    booker: {fileID: 6615616145099745036, guid: 9f510c19840db7144b263c30ecdd2dfb, type: 3}
+  - bookerColor: 4
+    booker: {fileID: 6615616145099745036, guid: 28117e56055f75948842e42f2bfef730, type: 3}
+  - bookerColor: 5
+    booker: {fileID: 6615616145099745036, guid: 912a76016ff0a154786f653a151c5b49, type: 3}
+  - bookerColor: 6
+    booker: {fileID: 6615616145099745036, guid: 816baefa066aa3746abeb60861e4f096, type: 3}
+  - bookerColor: 7
+    booker: {fileID: 6615616145099745036, guid: 9a054882b9afb7d479fbdb063c01620e, type: 3}
+  - bookerColor: 8
+    booker: {fileID: 6615616145099745036, guid: e575842139f5c5d4bb723befbaaca282, type: 3}
+  - bookerColor: 9
+    booker: {fileID: 6615616145099745036, guid: beb8d3dbff9aec845895fe0eaffa2bdf, type: 3}
+  - bookerColor: 10
+    booker: {fileID: 6615616145099745036, guid: 187ac300e150daa4395c65a79a6f1f11, type: 3}

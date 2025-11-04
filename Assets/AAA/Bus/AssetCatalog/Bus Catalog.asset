@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93cfaa1cd18345a4987d838dccafc7e2, type: 3}
+  m_Name: Bus Catalog
+  m_EditorClassIdentifier: 
+  busCatalog:
+  - busColor: 1
+    bus: {fileID: 3646222479971870724, guid: e457c391fffb1ee49974a76f7cdb9636, type: 3}
+  - busColor: 2
+    bus: {fileID: 3646222479971870724, guid: b07b56fcc256ffc499bdc646fad66df4, type: 3}
+  - busColor: 3
+    bus: {fileID: 3646222479971870724, guid: dbf256dc3c62347449c5a497eec8212c, type: 3}
+  - busColor: 4
+    bus: {fileID: 3646222479971870724, guid: 1d703ec8e9781b64da506e6a93622d61, type: 3}
+  - busColor: 5
+    bus: {fileID: 3646222479971870724, guid: 435b1fa0978bdab469f4a559a77c2a72, type: 3}
+  - busColor: 6
+    bus: {fileID: 3646222479971870724, guid: 0fc88059c0a98e14fb97e7a945e2c508, type: 3}
+  - busColor: 7
+    bus: {fileID: 3646222479971870724, guid: 568a6bb75208c114898bfc1c03282e53, type: 3}
+  - busColor: 8
+    bus: {fileID: 3646222479971870724, guid: 048160de9800c81478b6a6baf6fc38d9, type: 3}
+  - busColor: 9
+    bus: {fileID: 3646222479971870724, guid: b181072a8554bd542bd7f7181f259530, type: 3}
+  - busColor: 10
+    bus: {fileID: 3646222479971870724, guid: acf55fb0c9caf254fa93d82097828fd0, type: 3}
