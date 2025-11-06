@@ -39,6 +39,8 @@ public class Booker : MonoBehaviour
 
     private static readonly int Running = Animator.StringToHash("Running");
 
+    public bool booked;
+
     public void MoveCharacterInLine()
     {
         if (crrIndex == 0) return;

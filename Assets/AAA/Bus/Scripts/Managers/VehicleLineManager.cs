@@ -8,6 +8,8 @@ public class VehicleLineManager : MonoBehaviour
     //[SerializeField] private List<Transform> vehicleStops;
 
     [SerializeField] private List<PlacePoint> vehicleStopPoints;
+    public Transform bottomMounth;
+    public Transform topMounth;
 
     [SerializeField] private PlacePoint nextStopPoints;
     public PlacePoint NextStopPoints => nextStopPoints;

@@ -6,6 +6,12 @@ public class VehicleManager : MonoBehaviour
 {
     [Header("Bus prefabs")]
     [SerializeField] private BusContainer busContainer;
+
+    public Transform top;
+    public Transform bottom;
+    public Transform left;
+    public Transform right;
+
     private Dictionary<GameColors, Vehicle> DictType;
 
     public List<Vehicle> vehicleList = new List<Vehicle>();
