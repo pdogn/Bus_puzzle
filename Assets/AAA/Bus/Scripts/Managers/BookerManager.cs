@@ -10,6 +10,8 @@ public class BookerManager : MonoBehaviour
 
     public List<Booker> bookers = new List<Booker>();
 
+    private LevelDataSO _levelDataSo;
+
     public static BookerManager Instance;
 
     private void Awake()
@@ -26,27 +28,21 @@ public class BookerManager : MonoBehaviour
     private void Start()
     {
         SetDictTypeOfBooker();
-        InitializeLevel();
+
     }
 
     private void Update()
     {
-        //Test
-        //if (Input.GetKeyDown(KeyCode.Space))
-        //{
-        //    bookers[0].MoveBookerToBus();
-        //}
-        //if (Input.GetKeyDown(KeyCode.V))
-        //{
-        //    bool b = BookerLineManager.Instance.isFindedBus;
-        //    BookerLineManager.Instance.isFindedBus = !b;
-        //}
+        
     }
 
     public void InitializeLevel()
     {
         GenerateBooker();
     }
+
+    public void SetLevelData(LevelDataSO levelData) { _levelDataSo = levelData; }
+
     private void GenerateBooker()
     {
         for(int i=0; i<20; i++)
@@ -74,14 +70,4 @@ public class BookerManager : MonoBehaviour
             DictType[x.bookerColor] = x.booker;
         }
     }
-
-    //public void AllCharacterMoveInLine()
-    //{
-    //    foreach (var c in bookers)
-    //    {
-    //        //if (c.CrrIndex == 0) continue;
-    //        //c.CrrIndex = c.CrrIndex - 1;
-    //        c.MoveCharacterInLine();
-    //    }
-    //}
 }

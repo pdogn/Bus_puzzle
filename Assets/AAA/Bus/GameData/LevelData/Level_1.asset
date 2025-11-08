@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0b1e03acff6c73479fcc1a64deb2c07, type: 3}
+  m_Name: Level_1
+  m_EditorClassIdentifier: 
+  bookerColorList: 
+  VehicleColorMap:
+  - position: {x: -3.5252953, y: -15.507797, z: -16.17797}
+    rotation: {x: -0, y: -0, z: -0, w: 1}
+    gameColors: 1
+  - position: {x: 1.4441171, y: -15.534321, z: -12.15292}
+    rotation: {x: -0, y: -0, z: -0, w: 1}
+    gameColors: 2
+  - position: {x: 0.04003477, y: -15.501848, z: -16.613735}
+    rotation: {x: -0, y: 0.26622906, z: -0, w: 0.9639098}
+    gameColors: 4
+  - position: {x: -0.4559493, y: -15.465866, z: -22.538212}
+    rotation: {x: -0, y: -0, z: -0, w: 1}
+    gameColors: 3
+  - position: {x: 2.7825541, y: -15.517, z: -14.781081}
+    rotation: {x: 0, y: -0.7074769, z: -0, w: 0.7067365}
+    gameColors: 5
+  - position: {x: 1.7612917, y: -15.490383, z: -18.81871}
+    rotation: {x: -0, y: -0, z: -0, w: 1}
+    gameColors: 6
+  - position: {x: 3.4697776, y: -15.551033, z: -9.618023}
+    rotation: {x: -0, y: -0, z: -0, w: 1}
+    gameColors: 8
+  - position: {x: -1.4598889, y: -15.551943, z: -9.480513}
+    rotation: {x: -0, y: -0, z: -0, w: 1}
+    gameColors: 9
+  - position: {x: 4.501587, y: -15.500866, z: -17.228413}
+    rotation: {x: -0, y: -0, z: -0, w: 1}
+    gameColors: 10
+  - position: {x: 3.2168512, y: -15.472883, z: -21.47432}
+    rotation: {x: -0, y: -0, z: -0, w: 1}
+    gameColors: 7
