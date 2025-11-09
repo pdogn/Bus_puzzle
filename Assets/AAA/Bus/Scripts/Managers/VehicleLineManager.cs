@@ -1,6 +1,8 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class VehicleLineManager : MonoBehaviour
 {
@@ -8,8 +10,8 @@ public class VehicleLineManager : MonoBehaviour
     //[SerializeField] private List<Transform> vehicleStops;
 
     [SerializeField] private List<PlacePoint> vehicleStopPoints;
-    public Transform bottomMounth;
-    public Transform topMounth;
+    [SerializeField] private Transform exitPoint;
+    public Transform ExitPoint => exitPoint;
 
     [SerializeField] private PlacePoint nextStopPoints;
     public PlacePoint NextStopPoints => nextStopPoints;
@@ -18,8 +20,8 @@ public class VehicleLineManager : MonoBehaviour
     //[SerializeField] private Vehicle[] vehicles;
     //public Vehicle[] Vehicles => vehicles;
 
-    [SerializeField] private List<Vehicle> vehicles2;
-    public List<Vehicle> Vehicles2 => vehicles2;
+    [SerializeField] private List<Vehicle> vehicles;
+    public List<Vehicle> Vehicles => vehicles;
 
     public bool isVehicleReaching;
 
@@ -42,21 +44,6 @@ public class VehicleLineManager : MonoBehaviour
         //vehicles = new Vehicle[vehicleStops.Count];
     }
 
-    //public Vector3 GetStopPositionEmpty()
-    //{
-    //    Vector3 _position = Vector3.zero;
-    //    for(int i=0; i< Vehicles.Length; i++)
-    //    {
-    //        if(Vehicles[i] == null)
-    //        {
-    //            _position = vehicleStops[i].position;
-    //            break;
-    //        }
-    //    }
-
-    //    return _position;
-    //}
-
     public bool IsAvaiableStopPointEmpty()
     {
         foreach(var child in vehicleStopPoints)
@@ -70,30 +57,10 @@ public class VehicleLineManager : MonoBehaviour
         return false;
     }
 
-    //public int GetIndexVehicleNull()
-    //{
-    //    int idx = 0;
-    //    for (int i = 0; i < Vehicles.Length; i++)
-    //    {
-    //        if (Vehicles[i] == null)
-    //        {
-    //            idx = i;
-    //            break;
-    //        }
-    //    }
-    //    return idx;
-    //}
-
-
-    //public void AddVehicleToLine(Vehicle vehicle)
-    //{
-    //    int index = GetIndexVehicleNull();
-    //    Vehicles[index] = vehicle;
-    //}
 
     public void AddVehicleToLine2(Vehicle vehicle)
     {
-        vehicles2.Add(vehicle);
+        vehicles.Add(vehicle);
     }
 
     public void HandleOnVehicleReach(Vehicle vehicle)
@@ -117,5 +84,39 @@ public class VehicleLineManager : MonoBehaviour
     private bool ColorControl(Vehicle vehicle, Booker booker)
     {
         return booker.Attributes.bookerColor == vehicle.Attributes.VehicleColor;
+    }
+
+    //public void MoveToExit(Vehicle vehicle)
+    //{
+    //    DOTween.Kill(vehicle.transform);
+    //    Vector3 origin = vehicle.transform.position;
+    //    Vector3 target = vehicle.targetPlacePoint.subPoint1.position;
+    //    float distance = Vector3.Distance(origin, target);
+    //    float duration = distance / 45f;
+    //    vehicle.transform.DOMove(target, duration).SetEase(Ease.Linear).OnComplete(() =>
+    //    {
+    //        Vector3 direction = (target - transform.position).normalized;
+    //        if (direction != Vector3.zero)
+    //        {
+    //            vehicle.transform.rotation = Quaternion.LookRotation(direction) * Quaternion.Euler(0, -90f, 0);
+    //        }
+    //        target = vehicle.targetPlacePoint.subPoint2.position;
+    //        distance = Vector3.Distance(origin, target);
+    //        duration = distance / 45f;
+
+    //        vehicle.transform.DOMove(target, duration).SetEase(Ease.Linear).OnComplete(() =>
+    //        {
+    //            target = exitPoint.position;
+    //            distance = Vector3.Distance(origin, target);
+    //            duration = distance / 45f;
+
+    //            vehicle.transform.DOMove(target, duration).SetEase(Ease.Linear);
+    //        });
+    //    });
+    //}
+
+    public void RemoveVehicleInLine(Vehicle vehicle)
+    {
+        Vehicles.Remove(vehicle);
     }
 }

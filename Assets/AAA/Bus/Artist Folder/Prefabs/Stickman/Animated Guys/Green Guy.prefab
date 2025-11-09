@@ -5,72 +5,77 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1531059296618495262, guid: 2ece9e986b2cc5b4ca9e4b342beba11a,
-        type: 3}
+    - target: {fileID: 1531059296618495262, guid: 2ece9e986b2cc5b4ca9e4b342beba11a, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 4241c33a448f5094fa8f91dabd21f4a1, type: 2}
-    - target: {fileID: 2660902907039867770, guid: 2ece9e986b2cc5b4ca9e4b342beba11a,
-        type: 3}
+    - target: {fileID: 2660902907039867770, guid: 2ece9e986b2cc5b4ca9e4b342beba11a, type: 3}
       propertyPath: m_Name
       value: Green Guy
       objectReference: {fileID: 0}
-    - target: {fileID: 3433640346999470528, guid: 2ece9e986b2cc5b4ca9e4b342beba11a,
-        type: 3}
+    - target: {fileID: 3433640346999470528, guid: 2ece9e986b2cc5b4ca9e4b342beba11a, type: 3}
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3433640346999470528, guid: 2ece9e986b2cc5b4ca9e4b342beba11a,
-        type: 3}
+    - target: {fileID: 3433640346999470528, guid: 2ece9e986b2cc5b4ca9e4b342beba11a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3433640346999470528, guid: 2ece9e986b2cc5b4ca9e4b342beba11a,
-        type: 3}
+    - target: {fileID: 3433640346999470528, guid: 2ece9e986b2cc5b4ca9e4b342beba11a, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3433640346999470528, guid: 2ece9e986b2cc5b4ca9e4b342beba11a,
-        type: 3}
+    - target: {fileID: 3433640346999470528, guid: 2ece9e986b2cc5b4ca9e4b342beba11a, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3433640346999470528, guid: 2ece9e986b2cc5b4ca9e4b342beba11a,
-        type: 3}
+    - target: {fileID: 3433640346999470528, guid: 2ece9e986b2cc5b4ca9e4b342beba11a, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 3433640346999470528, guid: 2ece9e986b2cc5b4ca9e4b342beba11a,
-        type: 3}
+    - target: {fileID: 3433640346999470528, guid: 2ece9e986b2cc5b4ca9e4b342beba11a, type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3433640346999470528, guid: 2ece9e986b2cc5b4ca9e4b342beba11a,
-        type: 3}
+    - target: {fileID: 3433640346999470528, guid: 2ece9e986b2cc5b4ca9e4b342beba11a, type: 3}
       propertyPath: m_LocalRotation.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3433640346999470528, guid: 2ece9e986b2cc5b4ca9e4b342beba11a,
-        type: 3}
+    - target: {fileID: 3433640346999470528, guid: 2ece9e986b2cc5b4ca9e4b342beba11a, type: 3}
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3433640346999470528, guid: 2ece9e986b2cc5b4ca9e4b342beba11a,
-        type: 3}
+    - target: {fileID: 3433640346999470528, guid: 2ece9e986b2cc5b4ca9e4b342beba11a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3433640346999470528, guid: 2ece9e986b2cc5b4ca9e4b342beba11a,
-        type: 3}
+    - target: {fileID: 3433640346999470528, guid: 2ece9e986b2cc5b4ca9e4b342beba11a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3433640346999470528, guid: 2ece9e986b2cc5b4ca9e4b342beba11a,
-        type: 3}
+    - target: {fileID: 3433640346999470528, guid: 2ece9e986b2cc5b4ca9e4b342beba11a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8738831970947556282, guid: 2ece9e986b2cc5b4ca9e4b342beba11a, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 4c2034508acb63d498e03da7f81935f5, type: 2}
+    - target: {fileID: 8738831970947556282, guid: 2ece9e986b2cc5b4ca9e4b342beba11a, type: 3}
+      propertyPath: m_WarningMessage
+      value: "\nBinding warning: Some generic clip(s) animate transforms that are
+        already bound by a Humanoid avatar. These transforms can only be changed
+        by Humanoid clips.\n\tTransform 'mixamorig:Hips'\n\tTransform 'mixamorig:RightArm'\n\tTransform
+        'mixamorig:LeftLeg'\n\tTransform 'mixamorig:LeftUpLeg'\n\tTransform 'mixamorig:LeftArm'\n\tTransform
+        'mixamorig:RightLeg'\n\tTransform 'mixamorig:LeftForeArm'\n\tTransform 'mixamorig:RightForeArm'\n\tTransform
+        'mixamorig:RightUpLeg'\n\tTransform 'mixamorig:RightArm'\n\tand more ...\n\tFrom
+        animation clip 'Idle2'"
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2ece9e986b2cc5b4ca9e4b342beba11a, type: 3}

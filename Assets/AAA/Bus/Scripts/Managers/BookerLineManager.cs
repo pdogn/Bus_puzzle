@@ -63,7 +63,7 @@ public class BookerLineManager : MonoBehaviour
             return;
         }
 
-        foreach (var vehicle in VehicleLineManager.Instance.Vehicles2)
+        foreach (var vehicle in VehicleLineManager.Instance.Vehicles)
         {
             if (vehicle == null || vehicle.bookerCount == 3 || !ColorControl(vehicle, booker)) continue;
 
@@ -82,7 +82,7 @@ public class BookerLineManager : MonoBehaviour
     bool BookerFindedVehicle(Booker booker)
     {
         bool result = false;
-        foreach (var vehicle in VehicleLineManager.Instance.Vehicles2)
+        foreach (var vehicle in VehicleLineManager.Instance.Vehicles)
         {
             result = false;
             if (ColorControl(vehicle, booker) && vehicle.bookerCount != 3)
@@ -101,6 +101,13 @@ public class BookerLineManager : MonoBehaviour
             //c.CrrIndex = c.CrrIndex - 1;
             c.MoveCharacterInLine();
         }
+    }
+
+    public void AddBookerToLastLine(Booker booker)
+    {
+        booker.transform.position = standPoints[19].position;
+        BookerManager.Instance.bookers.Add(booker);
+        booker.crrIndex = 19;
     }
 
     private bool ColorControl(Vehicle vehicle, Booker booker)

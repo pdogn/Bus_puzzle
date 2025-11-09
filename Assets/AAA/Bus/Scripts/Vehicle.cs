@@ -32,6 +32,7 @@ public class Vehicle : MonoBehaviour
     public event Action<Vehicle> OnExit;
     public event Action<Vehicle> OnEnd;
 
+    
     public bool FindAPath()
     {
         if (VehicleLineManager.Instance.IsAvaiableStopPointEmpty())
@@ -46,12 +47,12 @@ public class Vehicle : MonoBehaviour
     {
         Clicked = true;
 
-        PlacePoint p = VehicleLineManager.Instance.NextStopPoints;
+        targetPlacePoint = VehicleLineManager.Instance.NextStopPoints;
         //p.hasVehicle = true;
         //VehicleLineManager.Instance.AddVehicleToLine2(this);
         //MoveVehicle(p);
         //MoveToScreenEdge(p);
-        MoveVehicle(p);
+        MoveVehicle(targetPlacePoint);
     }
 
     private void MoveTo(Vector3 destination, TweenCallback onComplete)
@@ -83,8 +84,8 @@ public class Vehicle : MonoBehaviour
         Vector3 origin = transform.position + boxCollider.center/* - dir * 0.1f*/;
         origin.y = transform.position.y;
 
-        float maxDistance = 10f;
-        LayerMask mask = LayerMask.GetMask("Default"); // tùy layer bạn đặt xe và tường
+        float maxDistance = 50f;
+        //LayerMask mask = LayerMask.GetMask("Default"); 
 
         RaycastHit[] hits = Physics.BoxCastAll(origin, halfExtents, dir, transform.rotation, maxDistance);
 
@@ -109,7 +110,8 @@ public class Vehicle : MonoBehaviour
                         .SetEase(Ease.OutQuad)
                         .OnComplete(() =>
                         {
-                            DOVirtual.DelayedCall(0.3f, () =>  // ⏸️ dừng 0.3 giây
+                            ImpactOtherVehicle(obstacle, 10f);
+                            DOVirtual.DelayedCall(0.1f, () =>  // dừng 0.1 giây
                             {
                                 // Quay về vị trí cũ
                                 transform.DOMove(startPos, duration)
@@ -199,6 +201,29 @@ public class Vehicle : MonoBehaviour
         }
     }
 
+    public void MoveToExit()
+    {
+        DOTween.Kill(this.transform);
+        MoveTo(targetPlacePoint.subPoint1.position, () =>
+        {
+            MoveTo(VehicleLineManager.Instance.ExitPoint.position, null);
+        });
+    }
+
+    void ImpactOtherVehicle(GameObject other, float punchStrength)
+    {
+        Vector3 impactDir = (this.transform.position - other.transform.position).normalized;
+        Vector3 punchRotation = new Vector3(-impactDir.z, 0, impactDir.x) * punchStrength;
+        other.transform.DOPunchRotation(punchRotation, 0.4f, 10, 1);
+    }
+
+    public void OnVehicleExit()
+    {
+        MoveToExit();
+        VehicleLineManager.Instance.RemoveVehicleInLine(this);
+        targetPlacePoint.hasVehicle = false;
+    }
+
 #if UNITY_EDITOR
     private void OnDrawGizmosSelected()
     {
@@ -208,7 +233,7 @@ public class Vehicle : MonoBehaviour
         Vector3 halfExtents = Vector3.Scale(boxCollider.size * 0.5f, transform.lossyScale);
         Vector3 origin = transform.position + boxCollider.center/* - dir * 0.1f*/;
         origin.y = transform.position.y;
-        float maxDistance = 10f;
+        float maxDistance = 50f;
 
         Gizmos.color = new Color(0, 1, 1, 0.25f);
         Matrix4x4 matrix = Matrix4x4.TRS(origin, transform.rotation, Vector3.one);

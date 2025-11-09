@@ -80,8 +80,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bookerAttributes:
     bookerColor: 8
-  bookerAnim: {fileID: 0}
+  bookerAnim: {fileID: 2101132013417799488}
   crrIndex: 0
+  booked: 0
 --- !u!65 &5162301979055058910
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -171,6 +172,11 @@ PrefabInstance:
       addedObject: {fileID: 2419806008492492174}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 96d3f16f6fdf06c44b972925b5b9e24f, type: 3}
+--- !u!95 &2101132013417799488 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 6855840437414930146, guid: 96d3f16f6fdf06c44b972925b5b9e24f, type: 3}
+  m_PrefabInstance: {fileID: 4759300826405026210}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2135839048973998009 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6892874327341461019, guid: 96d3f16f6fdf06c44b972925b5b9e24f, type: 3}

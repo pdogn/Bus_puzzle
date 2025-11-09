@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class BookerManager : MonoBehaviour
 {
@@ -11,6 +12,9 @@ public class BookerManager : MonoBehaviour
     public List<Booker> bookers = new List<Booker>();
 
     private LevelDataSO _levelDataSo;
+
+    private Queue<Booker> poolBooker = new Queue<Booker>();
+    [SerializeField] private Transform _pooling;
 
     public static BookerManager Instance;
 
@@ -28,7 +32,7 @@ public class BookerManager : MonoBehaviour
     private void Start()
     {
         SetDictTypeOfBooker();
-
+        InitPool(10);
     }
 
     private void Update()
@@ -70,4 +74,46 @@ public class BookerManager : MonoBehaviour
             DictType[x.bookerColor] = x.booker;
         }
     }
+
+    public void RemoveBookerInLine(Booker booker)
+    {
+        bookers.Remove(booker);
+    }
+
+    public void AddBookerToLine(Booker booker)
+    {
+        bookers.Add(booker);
+    }
+
+    void InitPool(int poolSize)
+    {
+        for (int i = 0; i < poolSize; i++)
+        {
+            Booker newBooker = Instantiate(DictType[GameColors.BLUE], _pooling);
+            newBooker.gameObject.SetActive(false);
+            newBooker.OnReach += BookerLineManager.Instance.HandleBookerReach;
+            poolBooker.Enqueue(newBooker);
+        }
+    }
+
+    public Booker GetBookerInPool()
+    {
+        if (poolBooker.Count > 0)
+        {
+            Booker booker = poolBooker.Dequeue();
+            booker.gameObject.SetActive(true);
+            booker.gameObject.transform.parent = this.transform;
+            return booker;
+        }
+        Booker newBooker = Instantiate(DictType[GameColors.BLUE], this.transform);
+        return newBooker;
+    }
+
+    public void ReturnToPool(Booker booker)
+    {
+        booker.gameObject.SetActive(false);
+        booker.gameObject.transform.parent = _pooling;
+        poolBooker.Enqueue(booker);
+    }
+
 }

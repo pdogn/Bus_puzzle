@@ -80,8 +80,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bookerAttributes:
     bookerColor: 3
-  bookerAnim: {fileID: 0}
+  bookerAnim: {fileID: 11808973826817541}
   crrIndex: 0
+  booked: 0
 --- !u!65 &1548094115417256923
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -160,8 +161,18 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6855840437414930146, guid: 1c398087182a2cc498595a21d18fe1a1, type: 3}
-      propertyPath: m_WarningMessage
+      propertyPath: m_Controller
       value: 
+      objectReference: {fileID: 9100000, guid: 4c2034508acb63d498e03da7f81935f5, type: 2}
+    - target: {fileID: 6855840437414930146, guid: 1c398087182a2cc498595a21d18fe1a1, type: 3}
+      propertyPath: m_WarningMessage
+      value: "\nBinding warning: Some generic clip(s) animate transforms that are
+        already bound by a Humanoid avatar. These transforms can only be changed
+        by Humanoid clips.\n\tTransform 'mixamorig:Hips'\n\tTransform 'mixamorig:RightArm'\n\tTransform
+        'mixamorig:LeftLeg'\n\tTransform 'mixamorig:LeftUpLeg'\n\tTransform 'mixamorig:LeftArm'\n\tTransform
+        'mixamorig:RightLeg'\n\tTransform 'mixamorig:LeftForeArm'\n\tTransform 'mixamorig:RightForeArm'\n\tTransform
+        'mixamorig:RightUpLeg'\n\tTransform 'mixamorig:RightArm'\n\tand more ...\n\tFrom
+        animation clip 'Idle2'"
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -171,6 +182,11 @@ PrefabInstance:
       addedObject: {fileID: 2982916584086618927}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1c398087182a2cc498595a21d18fe1a1, type: 3}
+--- !u!95 &11808973826817541 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 6855840437414930146, guid: 1c398087182a2cc498595a21d18fe1a1, type: 3}
+  m_PrefabInstance: {fileID: 6849168812822747367}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &46524809850599164 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6892874327341461019, guid: 1c398087182a2cc498595a21d18fe1a1, type: 3}

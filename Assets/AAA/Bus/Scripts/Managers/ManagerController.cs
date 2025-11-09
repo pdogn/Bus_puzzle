@@ -19,25 +19,12 @@ public class ManagerController : MonoBehaviour
         Instance = this;
     }
 
-    private void Start()
-    {
-        //LoadGameData(0);
-    }
-
-    private void Update()
-    {
-        //if (Input.GetKeyDown(KeyCode.L))
-        //{
-        //    LoadGameData(1);
-        //}
-    }
-
-    public void LoadGameData(int lv)
+    public void LoadGameData()
     {
         ClearLevel();
 
-        var level = levelCatalog.gameLevels[lv];
-        //var level = levelCatalog.gameLevels[LevelManager.Instance.CurrentLevel];
+        //var level = levelCatalog.gameLevels[lv];
+        var level = levelCatalog.gameLevels[LevelManager.Instance.CurrentLevel];
         //LevelCount.SetText((LevelManager.Instance.CurrentLevel + 1).ToString());
 
         BookerManager.Instance.SetLevelData(level);

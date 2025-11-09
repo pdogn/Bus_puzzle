@@ -1,4 +1,4 @@
-using BookerNamespace;
+﻿using BookerNamespace;
 using DG.Tweening;
 using System;
 using UnityEngine;
@@ -46,10 +46,14 @@ public class Booker : MonoBehaviour
         if (crrIndex == 0) return;
 
         var nextPos = BookerLineManager.Instance.StandPoints[crrIndex -1].position;
+        transform.LookAt(nextPos);
+
+        bookerAnim.SetBool(Running, true);
 
         transform.DOMove(nextPos, .2f).OnComplete(() =>
         {
             crrIndex = crrIndex - 1;
+            bookerAnim.SetBool(Running, false);
             if (crrIndex == 0)
             {
                 BookerLineManager.Instance.firstbooker = this;
@@ -74,18 +78,50 @@ public class Booker : MonoBehaviour
 
     public void MoveBookerToBus( Vehicle vehilcle)
     {
-        var targetPos = Vector3.zero;
-        targetPos = vehilcle.transform.position;
-        transform.LookAt(targetPos);
+        ////booker ra khỏi hàng
+        //BookerManager.Instance.RemoveBookerInLine(this);
+        ////Lấy booker trong pool
+        //Booker _booker = BookerManager.Instance.GetBookerInPool();
+        ////Thêm booker và0 cuối hàng
+        ////BookerLineManager.Instance.AddBookerToLastLine(_booker);
+
+        var vehiclePos = vehilcle.transform.position;
+        Vector3 dir = (vehiclePos - this.transform.position).normalized;
+        vehiclePos -= dir * .35f; //lùi lại 0.35f so với xe
+                               
+        transform.LookAt(vehiclePos);
 
         vehilcle.bookerCount++;
+        bookerAnim.SetBool(Running, true);
 
         BookerLineManager.Instance.AllCharacterMoveInLine();
 
-        transform.DOMove(targetPos, .5f).OnComplete(() =>
+        //booker ra khỏi hàng
+        BookerManager.Instance.RemoveBookerInLine(this);
+        //Lấy booker trong pool
+        Booker _booker = BookerManager.Instance.GetBookerInPool();
+        //Thêm booker và0 cuối hàng
+        BookerLineManager.Instance.AddBookerToLastLine(_booker);
+
+        transform.DOMove(vehiclePos, .5f).OnComplete(() =>
         {
+            DOTween.Kill(vehilcle.transform);
+
+            vehilcle.transform.DOShakePosition(0.5f, 0.2f, 10, 90, false, true).OnComplete(() =>
+            {
+                if(vehilcle.bookerCount == 3)
+                {
+                    //VehicleLineManager.Instance.MoveToExit(vehilcle);
+                    //vehilcle.MoveToExit();
+                    vehilcle.OnVehicleExit();
+                }
+            });
+            //vehilcle.transform.DOPunchRotation(new Vector3(0, 0, 10), 0.4f, 10, 1);
+            this.gameObject.SetActive(false);
+            bookerAnim.SetBool(Running, false);
             Debug.Log("Return Pool");
-            //CrrIndex = 19;
+            //Thêm vào pool
+            BookerManager.Instance.ReturnToPool(this);
         });
     }
 }
