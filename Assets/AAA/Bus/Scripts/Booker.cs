@@ -103,7 +103,8 @@ public class Booker : MonoBehaviour
         //booker ra khỏi hàng
         BookerManager.Instance.RemoveBookerInLine(this);
         //Lấy booker trong pool
-        Booker _booker = BookerManager.Instance.GetBookerInPool();
+        GameColors cl = BookerManager.Instance.GetNextColorInQueue();
+        Booker _booker = BookerManager.Instance.GetBookerInPool(cl);
         //Thêm booker và0 cuối hàng
         BookerLineManager.Instance.AddBookerToLastLine(_booker);
 
@@ -158,13 +159,16 @@ public class Booker : MonoBehaviour
                 bookerAnim.SetBool(Running, false);
                 BookerOnReachBus(vehicle); // callback riêng khi tới xe
             });
-
+        
         // Khi 1 booker đi, cả hàng tiến lên
         BookerLineManager.Instance.AllCharacterMoveInLine();
+
+        if (!BookerManager.Instance.BookerColorQueueNotEmpty()) return;
         //booker ra khỏi hàng
         BookerManager.Instance.RemoveBookerInLine(this);
         //Lấy booker trong pool
-        Booker _booker = BookerManager.Instance.GetBookerInPool();
+        GameColors cl = BookerManager.Instance.GetNextColorInQueue();
+        Booker _booker = BookerManager.Instance.GetBookerInPool(cl);
         //Thêm booker và0 cuối hàng
         BookerLineManager.Instance.AddBookerToLastLine(_booker);
     }
@@ -184,7 +188,7 @@ public class Booker : MonoBehaviour
             {
                 vehicle.isLeaving = true;
 
-                DOVirtual.DelayedCall(.5f, () =>
+                DOVirtual.DelayedCall(.4f, () =>
                 {
                     vehicle.transform.DOKill();
                     vehicle.OnVehicleExit();

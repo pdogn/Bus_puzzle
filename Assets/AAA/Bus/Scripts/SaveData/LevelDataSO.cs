@@ -17,4 +17,5 @@ public class VehicleData
     public Vector3 position;
     public Quaternion rotation;
     public GameColors gameColors;
+    public int maxSizeCount;
 }

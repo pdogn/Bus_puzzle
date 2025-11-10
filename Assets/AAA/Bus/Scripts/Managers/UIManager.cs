@@ -7,11 +7,16 @@ public class UIManager : MonoBehaviour
 {
     [SerializeField] private Button startButton;
 
+    [Header("Win")]
+    [SerializeField] private GameObject WinUI;
+    [SerializeField] private Button nextLevelButton;
+    [SerializeField] private Button rePlayLevelButton;
+
     private void Start()
     {
         StartGameClick();
 
-
+        PLayNextLevel();
     }
 
     public void StartGameClick()
@@ -20,6 +25,16 @@ public class UIManager : MonoBehaviour
         {
             ManagerController.Instance.LoadGameData();
             startButton.gameObject.SetActive(false);
+        });
+    }
+
+    public void PLayNextLevel()
+    {
+        nextLevelButton.onClick.AddListener(() =>
+        {
+            LevelManager.Instance.IncreaseLevel();
+            ManagerController.Instance.LoadGameData();
+            WinUI.gameObject.SetActive(false);
         });
     }
 

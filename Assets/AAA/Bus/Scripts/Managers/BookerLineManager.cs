@@ -82,4 +82,9 @@ public class BookerLineManager : MonoBehaviour
     {
         return booker.Attributes.bookerColor == vehicle.Attributes.VehicleColor;
     }
+
+    public void ClearLevel()
+    {
+
+    }
 }

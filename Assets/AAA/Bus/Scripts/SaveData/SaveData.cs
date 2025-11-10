@@ -38,6 +38,7 @@ public class SaveData : MonoBehaviour
             tData.position = child.position;
             tData.rotation = child.rotation;
             tData.gameColors = vehicle.Attributes.VehicleColor;
+            tData.maxSizeCount = vehicle.maxSize;
 
             newDataAsset.VehicleColorMap.Add(tData);
         }
@@ -71,6 +72,7 @@ public class SaveData : MonoBehaviour
             tData.position = child.position;
             tData.rotation = child.rotation;
             tData.gameColors = vehicle.Attributes.VehicleColor;
+            tData.maxSizeCount = vehicle.maxSize;
 
             dataAsset.VehicleColorMap.Add(tData);
         }

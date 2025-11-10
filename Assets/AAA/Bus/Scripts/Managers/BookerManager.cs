@@ -13,7 +13,9 @@ public class BookerManager : MonoBehaviour
 
     private LevelDataSO _levelDataSo;
 
-    private Queue<Booker> poolBooker = new Queue<Booker>();
+    private Queue<GameColors> _bookerColorsQueue = new Queue<GameColors>();
+
+    private List<Booker> poolBooker = new List<Booker>();
     [SerializeField] private Transform _pooling;
 
     public static BookerManager Instance;
@@ -32,7 +34,7 @@ public class BookerManager : MonoBehaviour
     private void Start()
     {
         SetDictTypeOfBooker();
-        InitPool(10);
+        //InitPool(10);
     }
 
     private void Update()
@@ -42,10 +44,21 @@ public class BookerManager : MonoBehaviour
 
     public void InitializeLevel()
     {
+        InitBookerColorsQueue();
         GenerateBooker();
+        InitPool(10);
     }
 
     public void SetLevelData(LevelDataSO levelData) { _levelDataSo = levelData; }
+
+
+    private void InitBookerColorsQueue()
+    {
+        foreach(var b in _levelDataSo.bookerColorList)
+        {
+            _bookerColorsQueue.Enqueue(b);
+        }
+    }
 
     private void GenerateBooker()
     {
@@ -53,7 +66,8 @@ public class BookerManager : MonoBehaviour
         {
             Booker newBooker;
             var initialPos = BookerLineManager.Instance.StandPoints[i].position;
-            newBooker = Instantiate(DictType[GameColors.LILAC], initialPos, Quaternion.identity, transform);
+            GameColors bookerColor = _bookerColorsQueue.Dequeue();
+            newBooker = Instantiate(DictType[bookerColor], initialPos, Quaternion.identity, transform);
 
             if (i == 0)
             {
@@ -85,6 +99,18 @@ public class BookerManager : MonoBehaviour
         bookers.Add(booker);
     }
 
+    public bool BookerColorQueueNotEmpty()
+    {
+        return _bookerColorsQueue.Count > 0;
+    }
+
+    public GameColors GetNextColorInQueue()
+    {
+        GameColors cl = _bookerColorsQueue.Dequeue();
+        Debug.Log("oclor: " + cl);
+        return cl;
+    }
+
     void InitPool(int poolSize)
     {
         for (int i = 0; i < poolSize; i++)
@@ -92,20 +118,31 @@ public class BookerManager : MonoBehaviour
             Booker newBooker = Instantiate(DictType[GameColors.BLUE], _pooling);
             newBooker.gameObject.SetActive(false);
             newBooker.OnReach += BookerLineManager.Instance.HandleBookerReach;
-            poolBooker.Enqueue(newBooker);
+            poolBooker.Add(newBooker);
         }
     }
 
-    public Booker GetBookerInPool()
+    public Booker GetBookerInPool(GameColors color)
     {
-        if (poolBooker.Count > 0)
+        //if (poolBooker.Count > 0)
+        //{
+        //    //Booker booker = poolBooker.Dequeue();
+        //    //booker.gameObject.SetActive(true);
+        //    //booker.gameObject.transform.parent = this.transform;
+        //    //return booker;
+        //    foreach(var booker in poolBooker)
+        //    {
+        //        if(color == booker.Attributes.bookerColor)
+        //            return booker;
+        //    }
+        //}
+        foreach (var booker in poolBooker)
         {
-            Booker booker = poolBooker.Dequeue();
-            booker.gameObject.SetActive(true);
-            booker.gameObject.transform.parent = this.transform;
-            return booker;
+            if (color == booker.Attributes.bookerColor)
+                return booker;
         }
-        Booker newBooker = Instantiate(DictType[GameColors.BLUE], this.transform);
+        Booker newBooker = Instantiate(DictType[color], this.transform);
+        newBooker.OnReach += BookerLineManager.Instance.HandleBookerReach;
         return newBooker;
     }
 
@@ -113,7 +150,24 @@ public class BookerManager : MonoBehaviour
     {
         booker.gameObject.SetActive(false);
         booker.gameObject.transform.parent = _pooling;
-        poolBooker.Enqueue(booker);
+        poolBooker.Add(booker);
     }
 
+
+    public void ClearBookers()
+    {
+        _bookerColorsQueue.Clear();
+        
+        foreach(var b in bookers)
+        {
+            Destroy(b.gameObject);
+        }
+        bookers?.Clear();
+
+        foreach(var b in poolBooker)
+        {
+            Destroy(b.gameObject);
+        }
+        poolBooker?.Clear();
+    }
 }

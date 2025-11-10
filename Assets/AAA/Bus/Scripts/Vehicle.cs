@@ -12,10 +12,14 @@ public class Vehicle : MonoBehaviour
 
     [SerializeField] private BoxCollider boxCollider;
 
+    [SerializeField] private Transform Vehicle_4;
+    [SerializeField] private Transform Vehicle_6;
+    [SerializeField] private Transform Vehicle_8;
+
     public bool Clicked;
     public int bookerCount = 0;
     public int bookerSittingCount = 0;
-    public int maxSize = 3;
+    [SerializeField] public int maxSize = 3;
 
     [Header("Move properties")]
     public float speed = 45f;            // tốc độ (đơn vị / giây)
@@ -153,6 +157,7 @@ public class Vehicle : MonoBehaviour
                                         // tới điểm đỗ xe
                                         MoveTo(p.Position, () =>
                                         {
+                                            Debug.Log("NHan khack");
                                             //VehicleLineManager.Instance.AddVehicleToLine2(this);
                                             OnReach?.Invoke(this);
                                             VehicleLineManager.Instance.AddVehicleToLine2(this);
@@ -185,7 +190,8 @@ public class Vehicle : MonoBehaviour
                                             MoveTo(p.Position, () =>
                                             {
                                                 //VehicleLineManager.Instance.AddVehicleToLine2(this);
-                                                OnReach?.Invoke(this);
+                                                Debug.Log("NHan khack");
+                                                OnReach?.Invoke(this);Debug.Log("NHan khack2");
                                                 VehicleLineManager.Instance.AddVehicleToLine2(this);
                                             });
                                         });
@@ -226,6 +232,33 @@ public class Vehicle : MonoBehaviour
         MoveToExit();
         VehicleLineManager.Instance.RemoveVehicleInLine(this);
         targetPlacePoint.hasVehicle = false;
+    }
+
+    public void SetTypeVehicle(int seatCount)
+    {
+        if (Vehicle_4 == null || Vehicle_6 == null || Vehicle_8 == null) return;
+
+        switch (seatCount)
+        {
+            case 4://xe 4 chỗ
+                Vehicle_4.gameObject.SetActive(true);
+                Vehicle_6.gameObject.SetActive(false);
+                Vehicle_8.gameObject.SetActive(false);
+                boxCollider = Vehicle_4.gameObject.GetComponent<BoxCollider>();
+                break;
+            case 6://xe 6 chỗ
+                Vehicle_4.gameObject.SetActive(false);
+                Vehicle_6.gameObject.SetActive(true);
+                Vehicle_8.gameObject.SetActive(false);
+                boxCollider = Vehicle_6.gameObject.GetComponent<BoxCollider>();
+                break;
+            case 8://xe 8 chỗ
+                Vehicle_4.gameObject.SetActive(false);
+                Vehicle_6.gameObject.SetActive(false);
+                Vehicle_8.gameObject.SetActive(true);
+                boxCollider = Vehicle_8.gameObject.GetComponent<BoxCollider>();
+                break;
+        }
     }
 
 #if UNITY_EDITOR

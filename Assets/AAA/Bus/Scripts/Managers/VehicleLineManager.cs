@@ -120,4 +120,10 @@ public class VehicleLineManager : MonoBehaviour
     {
         Vehicles.Remove(vehicle);
     }
+
+    public void ClearLevel()
+    {
+        //vehicles.Clear();
+        isVehicleReaching = false;
+    }
 }

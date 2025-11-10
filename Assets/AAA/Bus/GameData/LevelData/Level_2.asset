@@ -12,35 +12,45 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0b1e03acff6c73479fcc1a64deb2c07, type: 3}
   m_Name: Level_2
   m_EditorClassIdentifier: 
-  bookerColorList: 
+  bookerColorList: 020000000200000002000000020000000200000002000000020000000200000002000000020000000200000002000000020000000200000002000000020000000200000002000000020000000200000002000000020000000200000002000000020000000200000002000000020000000200000002000000
   VehicleColorMap:
   - position: {x: -3.5252953, y: -15.507797, z: -16.17797}
     rotation: {x: 0, y: -0.86966723, z: -0, w: 0.49363843}
     gameColors: 1
+    maxSizeCount: 0
   - position: {x: 1.4441171, y: -15.534321, z: -12.15292}
     rotation: {x: -0, y: -0, z: -0, w: 1}
     gameColors: 2
+    maxSizeCount: 0
   - position: {x: 0.04003477, y: -15.501848, z: -16.613735}
     rotation: {x: -0, y: 0.26622906, z: -0, w: 0.9639098}
     gameColors: 4
+    maxSizeCount: 0
   - position: {x: -0.4559493, y: -15.465866, z: -22.538212}
     rotation: {x: -0, y: -0, z: -0, w: 1}
     gameColors: 3
+    maxSizeCount: 0
   - position: {x: 2.7825541, y: -15.517, z: -14.781081}
     rotation: {x: -0, y: 0.7033949, z: -0, w: -0.7107993}
     gameColors: 5
+    maxSizeCount: 0
   - position: {x: 1.7612917, y: -15.490383, z: -18.81871}
     rotation: {x: -0, y: 0.9999792, z: -0, w: -0.0064575793}
     gameColors: 6
+    maxSizeCount: 0
   - position: {x: 3.4697776, y: -15.551033, z: -9.618023}
     rotation: {x: -0, y: 0.9806659, z: -0, w: 0.19568956}
     gameColors: 8
+    maxSizeCount: 0
   - position: {x: -1.4598889, y: -15.551943, z: -9.480513}
     rotation: {x: -0, y: -0, z: -0, w: 1}
     gameColors: 9
+    maxSizeCount: 0
   - position: {x: 4.501587, y: -15.500866, z: -17.228413}
     rotation: {x: -0, y: 0.3091829, z: -0, w: 0.9510026}
     gameColors: 10
+    maxSizeCount: 0
   - position: {x: -3.469965, y: -15.472883, z: -21.47432}
     rotation: {x: 0, y: -0.21882442, z: -0, w: 0.9757643}
     gameColors: 7
+    maxSizeCount: 0

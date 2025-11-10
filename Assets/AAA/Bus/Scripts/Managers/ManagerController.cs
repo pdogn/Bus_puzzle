@@ -42,9 +42,10 @@ public class ManagerController : MonoBehaviour
 
     private void ClearLevel()
     {
-        //LineManager.Instance.ClearLevel();
-        //VehicleManager.Instance.ClearVehicle();
-        //BookerManager.Instance.ClearBookers();
+        BookerLineManager.Instance.ClearLevel();
+        VehicleLineManager.Instance.ClearLevel();
+        VehicleManager.Instance.ClearVehicle();
+        BookerManager.Instance.ClearBookers();
         //ClearTiles();
 
     }

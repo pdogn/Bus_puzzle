@@ -62,10 +62,26 @@ public class VehicleManager : MonoBehaviour
             var initialPos = v.position;
             var initialRotation = v.rotation;
             var initialColor = v.gameColors;
+            int _maxSize = v.maxSizeCount;
+            if (_maxSize == 0) _maxSize = 4;
+
             newVehicle = Instantiate(DictType[initialColor], initialPos, initialRotation, transform);
+            newVehicle.maxSize = _maxSize;
+            newVehicle.SetTypeVehicle(_maxSize);
 
             newVehicle.OnReach += VehicleLineManager.Instance.HandleOnVehicleReach;
+
+            vehicleList.Add(newVehicle);
         }
+    }
+
+    public void ClearVehicle()
+    {
+        foreach(var v in vehicleList)
+        {
+            Destroy(v.gameObject);
+        }
+        vehicleList?.Clear();
     }
 
 }

@@ -82,6 +82,7 @@ MonoBehaviour:
     bookerColor: 8
   bookerAnim: {fileID: 2101132013417799488}
   crrIndex: 0
+  targetVehicle: {fileID: 0}
   booked: 0
 --- !u!65 &5162301979055058910
 BoxCollider:
@@ -161,8 +162,18 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6855840437414930146, guid: 96d3f16f6fdf06c44b972925b5b9e24f, type: 3}
-      propertyPath: m_WarningMessage
+      propertyPath: m_Controller
       value: 
+      objectReference: {fileID: 9100000, guid: 4c2034508acb63d498e03da7f81935f5, type: 2}
+    - target: {fileID: 6855840437414930146, guid: 96d3f16f6fdf06c44b972925b5b9e24f, type: 3}
+      propertyPath: m_WarningMessage
+      value: "\nBinding warning: Some generic clip(s) animate transforms that are
+        already bound by a Humanoid avatar. These transforms can only be changed
+        by Humanoid clips.\n\tTransform 'mixamorig:Hips'\n\tTransform 'mixamorig:RightArm'\n\tTransform
+        'mixamorig:LeftLeg'\n\tTransform 'mixamorig:LeftUpLeg'\n\tTransform 'mixamorig:LeftArm'\n\tTransform
+        'mixamorig:RightLeg'\n\tTransform 'mixamorig:LeftForeArm'\n\tTransform 'mixamorig:RightForeArm'\n\tTransform
+        'mixamorig:RightUpLeg'\n\tTransform 'mixamorig:RightArm'\n\tand more ...\n\tFrom
+        animation clip 'Idle2'"
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
