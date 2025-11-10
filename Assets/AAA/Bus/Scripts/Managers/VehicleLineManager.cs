@@ -67,6 +67,7 @@ public class VehicleLineManager : MonoBehaviour
     {
         if (isVehicleReaching) return;
 
+        Debug.Log("Xe reach");
         isVehicleReaching = true;
 
         var booker = BookerLineManager.Instance.firstbooker;

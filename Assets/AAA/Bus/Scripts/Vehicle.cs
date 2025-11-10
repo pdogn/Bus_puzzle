@@ -14,6 +14,8 @@ public class Vehicle : MonoBehaviour
 
     public bool Clicked;
     public int bookerCount = 0;
+    public int bookerSittingCount = 0;
+    public int maxSize = 3;
 
     [Header("Move properties")]
     public float speed = 45f;            // tốc độ (đơn vị / giây)
@@ -25,6 +27,8 @@ public class Vehicle : MonoBehaviour
     //public LayerMask obstacleLayer;
 
     public PlacePoint targetPlacePoint;
+
+    public bool isLeaving;
 
     public BusAttributes Attributes => busAttributes;
 
