@@ -13,7 +13,7 @@ public class Booker : MonoBehaviour
     public int crrIndex;
 
     public Vehicle targetVehicle;
-    public Vehicle TargetVehicle => targetVehicle;
+    //public Vehicle TargetVehicle => targetVehicle;
 
     public BookerAttributes Attributes => bookerAttributes;
 
@@ -100,13 +100,13 @@ public class Booker : MonoBehaviour
 
         BookerLineManager.Instance.AllCharacterMoveInLine();
 
-        //booker ra khỏi hàng
-        BookerManager.Instance.RemoveBookerInLine(this);
-        //Lấy booker trong pool
-        GameColors cl = BookerManager.Instance.GetNextColorInQueue();
-        Booker _booker = BookerManager.Instance.GetBookerInPool(cl);
-        //Thêm booker và0 cuối hàng
-        BookerLineManager.Instance.AddBookerToLastLine(_booker);
+        ////booker ra khỏi hàng
+        //BookerManager.Instance.RemoveBookerInLine(this);
+        ////Lấy booker trong pool
+        //GameColors cl = BookerManager.Instance.GetNextColorInQueue();
+        //Booker _booker = BookerManager.Instance.GetBookerInPool(cl);
+        ////Thêm booker và0 cuối hàng
+        //BookerLineManager.Instance.AddBookerToLastLine(_booker);
 
         transform.DOMove(vehiclePos, 1f).OnComplete(() =>
         {
@@ -163,12 +163,17 @@ public class Booker : MonoBehaviour
         // Khi 1 booker đi, cả hàng tiến lên
         BookerLineManager.Instance.AllCharacterMoveInLine();
 
-        if (!BookerManager.Instance.BookerColorQueueNotEmpty()) return;
+        if (!BookerManager.Instance.BookerColorQueueNotEmpty())
+        {
+            Debug.Log("emptty");
+            return;
+        }
+        Debug.Log("not emptty");
         //booker ra khỏi hàng
         BookerManager.Instance.RemoveBookerInLine(this);
         //Lấy booker trong pool
-        GameColors cl = BookerManager.Instance.GetNextColorInQueue();
-        Booker _booker = BookerManager.Instance.GetBookerInPool(cl);
+        //GameColors cl = BookerManager.Instance.GetNextColorInQueue();
+        Booker _booker = BookerManager.Instance.GetBookerInPool();
         //Thêm booker và0 cuối hàng
         BookerLineManager.Instance.AddBookerToLastLine(_booker);
     }
@@ -179,6 +184,9 @@ public class Booker : MonoBehaviour
 
         vehicle.transform.DOKill();
         vehicle.bookerSittingCount++;
+
+        //khi lên xe, số người còn lại giảm
+        BookerManager.Instance.BookerRemaining--;
 
         // Rung xe nhẹ khi có người lên
         vehicle.transform.DOShakePosition(0.5f, 0.2f, 10, 90, false, true).OnComplete(() =>

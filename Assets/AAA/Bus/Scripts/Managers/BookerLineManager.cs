@@ -13,6 +13,23 @@ public class BookerLineManager : MonoBehaviour
 
     public Booker firstbooker;
 
+    private int bookerRemaining;
+    public int BookerRemaining
+    {
+        get { return bookerRemaining; }
+        set
+        {
+            if (bookerRemaining != value)
+            {
+                bookerRemaining = value;
+                if(value == 0)
+                {
+                    Debug.Log("Win game");
+                }
+            }
+        }
+    }
+
     public static BookerLineManager Instance { get; private set; }
 
     private void Awake()

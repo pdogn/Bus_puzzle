@@ -1,5 +1,6 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -16,9 +17,27 @@ public class BookerManager : MonoBehaviour
     private Queue<GameColors> _bookerColorsQueue = new Queue<GameColors>();
 
     private List<Booker> poolBooker = new List<Booker>();
-    [SerializeField] private Transform _pooling;
+    //[SerializeField] private Transform _pooling;
 
     public static BookerManager Instance;
+
+    //Số người còn lại
+    private int bookerRemaining;
+    public int BookerRemaining
+    {
+        get { return bookerRemaining; }
+        set
+        {
+            if (bookerRemaining != value)
+            {
+                bookerRemaining = value;
+                if (value == 0)
+                {
+                    Debug.Log("Win game");
+                }
+            }
+        }
+    }
 
     private void Awake()
     {
@@ -47,6 +66,7 @@ public class BookerManager : MonoBehaviour
         InitBookerColorsQueue();
         GenerateBooker();
         InitPool(10);
+        BookerRemaining = _levelDataSo.bookerColorList.Count;
     }
 
     public void SetLevelData(LevelDataSO levelData) { _levelDataSo = levelData; }
@@ -113,16 +133,16 @@ public class BookerManager : MonoBehaviour
 
     void InitPool(int poolSize)
     {
-        for (int i = 0; i < poolSize; i++)
-        {
-            Booker newBooker = Instantiate(DictType[GameColors.BLUE], _pooling);
-            newBooker.gameObject.SetActive(false);
-            newBooker.OnReach += BookerLineManager.Instance.HandleBookerReach;
-            poolBooker.Add(newBooker);
-        }
+        //for (int i = 0; i < poolSize; i++)
+        //{
+        //    Booker newBooker = Instantiate(DictType[GameColors.BLUE], _pooling);
+        //    newBooker.gameObject.SetActive(false);
+        //    newBooker.OnReach += BookerLineManager.Instance.HandleBookerReach;
+        //    poolBooker.Add(newBooker);
+        //}
     }
 
-    public Booker GetBookerInPool(GameColors color)
+    public Booker GetBookerInPool()
     {
         //if (poolBooker.Count > 0)
         //{
@@ -136,20 +156,35 @@ public class BookerManager : MonoBehaviour
         //            return booker;
         //    }
         //}
-        foreach (var booker in poolBooker)
+        GameColors cl = _bookerColorsQueue.Dequeue();
+        Debug.Log("cccc:::" + _bookerColorsQueue.Count);
+
+        if(poolBooker.Count > 0)
         {
-            if (color == booker.Attributes.bookerColor)
+            var booker = poolBooker.FirstOrDefault(b => b.Attributes.bookerColor == cl);
+            if (booker != null)
+            {
+                poolBooker.Remove(booker);
+
+                booker.OnReach += BookerLineManager.Instance.HandleBookerReach;
+                booker.gameObject.SetActive(true);
+                //booker.gameObject.transform.parent = this.transform;
                 return booker;
+            }
         }
-        Booker newBooker = Instantiate(DictType[color], this.transform);
+        
+        Booker newBooker = Instantiate(DictType[cl], this.transform);
         newBooker.OnReach += BookerLineManager.Instance.HandleBookerReach;
+        newBooker.gameObject.SetActive(true);
+        //newBooker.gameObject.transform.parent = this.transform;
         return newBooker;
     }
 
     public void ReturnToPool(Booker booker)
     {
         booker.gameObject.SetActive(false);
-        booker.gameObject.transform.parent = _pooling;
+        booker.targetVehicle = null;
+        //booker.gameObject.transform.parent = _pooling;
         poolBooker.Add(booker);
     }
 

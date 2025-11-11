@@ -780,7 +780,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bookerContainer: {fileID: 11400000, guid: 2f6ba968444d0d340a6fb2623ec4fb58, type: 2}
   bookers: []
-  _pooling: {fileID: 935016374}
 --- !u!1 &306432527
 GameObject:
   m_ObjectHideFlags: 0
@@ -1053,7 +1052,7 @@ Transform:
   m_GameObject: {fileID: 429619395}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 2.67}
+  m_LocalPosition: {x: 1.79, y: 0, z: 2.67}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
