@@ -49,7 +49,7 @@ public class BookerLineManager : MonoBehaviour
 
         Vehicle foundVehicle = null;
 
-        foreach (var vehicle in VehicleLineManager.Instance.Vehicles)
+        foreach (var vehicle in VehicleLineManager.Instance.ListVehicles)
         {
             if (vehicle == null || vehicle.bookerCount >= vehicle.maxSize) continue;
             if (ColorControl(vehicle, booker))
@@ -62,15 +62,23 @@ public class BookerLineManager : MonoBehaviour
         if (foundVehicle == null)
         {
             VehicleLineManager.Instance.isVehicleReaching = false;
+            if (VehicleLineManager.Instance.IsAvaiableStopPointEmpty() == false && VehicleLineManager.Instance.IsNotHaveVehicleFull())
+            {
+                //kiểm tra bến xe đã đầy chưa và có xe nào chuẩn bị rời đi không
+                UIManager.Instance.ShowLostUI(1f);
+            }
             return;
         }
 
         booker.MoveBookerToBus(foundVehicle);
+
     }
+
+
 
     bool BookerFindedVehicle(Booker booker)
     {
-        foreach (var vehicle in VehicleLineManager.Instance.Vehicles)
+        foreach (var vehicle in VehicleLineManager.Instance.ListVehicles)
         {
             if (ColorControl(vehicle, booker) && vehicle.bookerCount < vehicle.maxSize)
             {

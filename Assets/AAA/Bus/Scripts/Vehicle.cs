@@ -134,7 +134,7 @@ public class Vehicle : MonoBehaviour
                 // 🧱 Nếu trúng tường
                 if (obstacle.CompareTag("Wall"))
                 {
-                    p.hasVehicle = true;
+                    p.hadVehicle = true;
 
                     Vector3 stopPos = h.point - dir * 0.05f;
                     float distance = Vector3.Distance(transform.position, stopPos);
@@ -211,12 +211,17 @@ public class Vehicle : MonoBehaviour
         }
     }
 
+    //Xe rời đi
     public void MoveToExit()
     {
         DOTween.Kill(this.transform);
         MoveTo(targetPlacePoint.subPoint1.position, () =>
         {
-            MoveTo(VehicleLineManager.Instance.ExitPoint.position, null);
+            MoveTo(VehicleLineManager.Instance.ExitPoint.position, () =>
+            {
+                //Số xe còn lại chưa chở khách đi -1
+                ManagerController.Instance.VehiclRemaining--;
+            });
         });
     }
 
@@ -231,7 +236,7 @@ public class Vehicle : MonoBehaviour
     {
         MoveToExit();
         VehicleLineManager.Instance.RemoveVehicleInLine(this);
-        targetPlacePoint.hasVehicle = false;
+        targetPlacePoint.hadVehicle = false;
     }
 
     public void SetTypeVehicle(int seatCount)

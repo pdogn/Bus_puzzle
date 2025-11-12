@@ -21,24 +21,6 @@ public class BookerManager : MonoBehaviour
 
     public static BookerManager Instance;
 
-    //Số người còn lại
-    private int bookerRemaining;
-    public int BookerRemaining
-    {
-        get { return bookerRemaining; }
-        set
-        {
-            if (bookerRemaining != value)
-            {
-                bookerRemaining = value;
-                if (value == 0)
-                {
-                    Debug.Log("Win game");
-                }
-            }
-        }
-    }
-
     private void Awake()
     {
         if(Instance != null && Instance != this)
@@ -65,8 +47,7 @@ public class BookerManager : MonoBehaviour
     {
         InitBookerColorsQueue();
         GenerateBooker();
-        InitPool(10);
-        BookerRemaining = _levelDataSo.bookerColorList.Count;
+        //InitPool(10);
     }
 
     public void SetLevelData(LevelDataSO levelData) { _levelDataSo = levelData; }

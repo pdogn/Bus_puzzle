@@ -186,7 +186,7 @@ public class Booker : MonoBehaviour
         vehicle.bookerSittingCount++;
 
         //khi lên xe, số người còn lại giảm
-        BookerManager.Instance.BookerRemaining--;
+        ManagerController.Instance.BookerRemaining--;
 
         // Rung xe nhẹ khi có người lên
         vehicle.transform.DOShakePosition(0.5f, 0.2f, 10, 90, false, true).OnComplete(() =>

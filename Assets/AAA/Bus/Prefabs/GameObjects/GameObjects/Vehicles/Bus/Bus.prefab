@@ -165,12 +165,18 @@ MonoBehaviour:
     VehicleColor: 0
   bookerAnim: {fileID: 0}
   boxCollider: {fileID: 4560818256182385719}
+  Vehicle_4: {fileID: 0}
+  Vehicle_6: {fileID: 0}
+  Vehicle_8: {fileID: 0}
   Clicked: 0
   bookerCount: 0
+  bookerSittingCount: 0
+  maxSize: 3
   speed: 45
   moveStep: 1
   stopOffset: 0.2
   targetPlacePoint: {fileID: 0}
+  isLeaving: 0
 --- !u!65 &4560818256182385719
 BoxCollider:
   m_ObjectHideFlags: 0

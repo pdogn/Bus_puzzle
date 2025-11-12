@@ -1,4 +1,4 @@
-using DG.Tweening;
+﻿using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -20,8 +20,8 @@ public class VehicleLineManager : MonoBehaviour
     //[SerializeField] private Vehicle[] vehicles;
     //public Vehicle[] Vehicles => vehicles;
 
-    [SerializeField] private List<Vehicle> vehicles;
-    public List<Vehicle> Vehicles => vehicles;
+    [SerializeField] private List<Vehicle> listVehicles;
+    public List<Vehicle> ListVehicles => listVehicles;
 
     public bool isVehicleReaching;
 
@@ -48,7 +48,7 @@ public class VehicleLineManager : MonoBehaviour
     {
         foreach(var child in vehicleStopPoints)
         {
-            if (!child.hasVehicle)
+            if (!child.hadVehicle)
             {
                 nextStopPoints = child;
                 return true;
@@ -57,17 +57,29 @@ public class VehicleLineManager : MonoBehaviour
         return false;
     }
 
+    public bool IsNotHaveVehicleFull()
+    {
+        //kiểm tra trong bến không có xe nào đầy 
+        foreach(var vehicle in ListVehicles)
+        {
+            if(vehicle.bookerCount == vehicle.maxSize)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
 
     public void AddVehicleToLine2(Vehicle vehicle)
     {
-        vehicles.Add(vehicle);
+        listVehicles.Add(vehicle);
     }
 
     public void HandleOnVehicleReach(Vehicle vehicle)
     {
         if (isVehicleReaching) return;
 
-        Debug.Log("Xe reach");
         isVehicleReaching = true;
 
         var booker = BookerLineManager.Instance.firstbooker;
@@ -79,6 +91,11 @@ public class VehicleLineManager : MonoBehaviour
         else
         {
             isVehicleReaching = false;
+        }
+
+        if(isVehicleReaching == false && !ColorControl(vehicle, booker) && listVehicles.Count == vehicleStopPoints.Count - 1)
+        {
+            UIManager.Instance.ShowLostUI(0.5f);
         }
     }
 
@@ -118,12 +135,18 @@ public class VehicleLineManager : MonoBehaviour
 
     public void RemoveVehicleInLine(Vehicle vehicle)
     {
-        Vehicles.Remove(vehicle);
+        ListVehicles.Remove(vehicle);
     }
 
     public void ClearLevel()
     {
-        //vehicles.Clear();
+        listVehicles?.Clear();
         isVehicleReaching = false;
+        foreach(var s in vehicleStopPoints)
+        {
+            s.hadVehicle = false;
+        }
+
+
     }
 }

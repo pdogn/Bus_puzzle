@@ -17,7 +17,7 @@ MonoBehaviour:
   - position: {x: -3.5252953, y: -15.507797, z: -16.17797}
     rotation: {x: 0, y: -0.86966723, z: -0, w: 0.49363843}
     gameColors: 1
-    maxSizeCount: 0
+    maxSizeCount: 8
   - position: {x: 1.4441171, y: -15.534321, z: -12.15292}
     rotation: {x: -0, y: -0, z: -0, w: 1}
     gameColors: 2

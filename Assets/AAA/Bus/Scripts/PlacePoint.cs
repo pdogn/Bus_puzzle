@@ -7,7 +7,7 @@ public class PlacePoint : MonoBehaviour
     public Transform subPoint1;
     public Transform subPoint2;
 
-    public bool hasVehicle;
+    public bool hadVehicle;
 
     public Vector3 Position;
 
