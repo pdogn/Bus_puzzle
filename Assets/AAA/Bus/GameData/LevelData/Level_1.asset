@@ -18,11 +18,11 @@ MonoBehaviour:
     rotation: {x: -0, y: -0, z: -0, w: 1}
     gameColors: 1
     maxSizeCount: 6
-  - position: {x: 0.2200346, y: -15.551943, z: -8.863735}
+  - position: {x: -0.5199652, y: -15.551943, z: -8.863735}
     rotation: {x: -0, y: 0.7071068, z: -0, w: -0.7071068}
     gameColors: 1
     maxSizeCount: 6
-  - position: {x: 1.6900346, y: -15.534321, z: -9.713736}
+  - position: {x: 0.8400347, y: -15.534321, z: -9.913736}
     rotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
     gameColors: 2
     maxSizeCount: 4

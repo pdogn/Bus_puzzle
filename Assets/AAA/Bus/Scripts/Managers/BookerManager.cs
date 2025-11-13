@@ -17,7 +17,7 @@ public class BookerManager : MonoBehaviour
     private Queue<GameColors> _bookerColorsQueue = new Queue<GameColors>();
 
     private List<Booker> poolBooker = new List<Booker>();
-    //[SerializeField] private Transform _pooling;
+    [SerializeField] private Transform _pooling;
 
     public static BookerManager Instance;
 
@@ -145,19 +145,22 @@ public class BookerManager : MonoBehaviour
             var booker = poolBooker.FirstOrDefault(b => b.Attributes.bookerColor == cl);
             if (booker != null)
             {
-                poolBooker.Remove(booker);
+                //poolBooker.Remove(booker);
 
-                booker.OnReach += BookerLineManager.Instance.HandleBookerReach;
+                //booker.OnReach += BookerLineManager.Instance.HandleBookerReach;
                 booker.gameObject.SetActive(true);
-                //booker.gameObject.transform.parent = this.transform;
+                booker.gameObject.transform.parent = this.transform;
+                booker.OnReach += BookerLineManager.Instance.HandleBookerReach;
+                poolBooker.Remove(booker);
                 return booker;
             }
         }
         
         Booker newBooker = Instantiate(DictType[cl], this.transform);
-        newBooker.OnReach += BookerLineManager.Instance.HandleBookerReach;
+        //newBooker.OnReach += BookerLineManager.Instance.HandleBookerReach;
         newBooker.gameObject.SetActive(true);
-        //newBooker.gameObject.transform.parent = this.transform;
+        newBooker.gameObject.transform.parent = this.transform;
+        newBooker.OnReach += BookerLineManager.Instance.HandleBookerReach;
         return newBooker;
     }
 
@@ -165,7 +168,7 @@ public class BookerManager : MonoBehaviour
     {
         booker.gameObject.SetActive(false);
         booker.targetVehicle = null;
-        //booker.gameObject.transform.parent = _pooling;
+        booker.gameObject.transform.parent = _pooling;
         poolBooker.Add(booker);
     }
 

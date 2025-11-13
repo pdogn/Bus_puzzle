@@ -15,6 +15,15 @@ public class SaveDataEditor : Editor
         EditorGUILayout.Space(10);
         EditorGUILayout.LabelField("Save Options", EditorStyles.boldLabel);
 
+        if (GUILayout.Button("Clear Data", GUILayout.Height(30)))
+        {
+            saver.Clearr();
+        }
+        if (GUILayout.Button("Load Data", GUILayout.Height(30)))
+        {
+            saver.LoadLevel();
+        }
+
         GUILayout.BeginHorizontal();
 
         if (GUILayout.Button("Save (Overwrite)", GUILayout.Height(30)))

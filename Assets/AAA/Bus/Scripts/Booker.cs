@@ -83,58 +83,58 @@ public class Booker : MonoBehaviour
         OnReach?.Invoke(this);
     }
 
-    public void MoveBookerToBusOld( Vehicle vehilcle)
-    {
-        if(targetVehicle == null)
-        {
-            targetVehicle = vehilcle;
-        }
-        var vehiclePos = targetVehicle.transform.position;
-        Vector3 dir = (vehiclePos - this.transform.position).normalized;
-        vehiclePos -= dir * .35f; //lùi lại 0.35f so với xe
+    //public void MoveBookerToBusOld( Vehicle vehilcle)
+    //{
+    //    if(targetVehicle == null)
+    //    {
+    //        targetVehicle = vehilcle;
+    //    }
+    //    var vehiclePos = targetVehicle.transform.position;
+    //    Vector3 dir = (vehiclePos - this.transform.position).normalized;
+    //    vehiclePos -= dir * .35f; //lùi lại 0.35f so với xe
                                
-        transform.LookAt(vehiclePos);
+    //    transform.LookAt(vehiclePos);
 
-        vehilcle.bookerCount++;
-        bookerAnim.SetBool(Running, true);
+    //    vehilcle.bookerCount++;
+    //    bookerAnim.SetBool(Running, true);
 
-        BookerLineManager.Instance.AllCharacterMoveInLine();
+    //    BookerLineManager.Instance.AllCharacterMoveInLine();
 
-        ////booker ra khỏi hàng
-        //BookerManager.Instance.RemoveBookerInLine(this);
-        ////Lấy booker trong pool
-        //GameColors cl = BookerManager.Instance.GetNextColorInQueue();
-        //Booker _booker = BookerManager.Instance.GetBookerInPool(cl);
-        ////Thêm booker và0 cuối hàng
-        //BookerLineManager.Instance.AddBookerToLastLine(_booker);
+    //    ////booker ra khỏi hàng
+    //    //BookerManager.Instance.RemoveBookerInLine(this);
+    //    ////Lấy booker trong pool
+    //    //GameColors cl = BookerManager.Instance.GetNextColorInQueue();
+    //    //Booker _booker = BookerManager.Instance.GetBookerInPool(cl);
+    //    ////Thêm booker và0 cuối hàng
+    //    //BookerLineManager.Instance.AddBookerToLastLine(_booker);
 
-        transform.DOMove(vehiclePos, 1f).OnComplete(() =>
-        {
-            //BookerLineManager.Instance.AllCharacterMoveInLine();
-            //DOTween.Kill(vehilcle.transform);
-            //vehilcle.bookerCount++;
-            if(vehilcle.bookerSittingCount < vehilcle.bookerCount)
-            {
-                vehilcle.bookerSittingCount++;
-            }
+    //    transform.DOMove(vehiclePos, 1f).OnComplete(() =>
+    //    {
+    //        //BookerLineManager.Instance.AllCharacterMoveInLine();
+    //        //DOTween.Kill(vehilcle.transform);
+    //        //vehilcle.bookerCount++;
+    //        if(vehilcle.BookerSittingCount < vehilcle.bookerCount)
+    //        {
+    //            vehilcle.BookerSittingCount++;
+    //        }
 
-            vehilcle.transform.DOShakePosition(0.5f, 0.2f, 10, 90, false, true).OnComplete(() =>
-            {
-                if(vehilcle.bookerCount == vehilcle.maxSize && vehilcle.bookerSittingCount == vehilcle.bookerCount)
-                {
-                    //VehicleLineManager.Instance.MoveToExit(vehilcle);
-                    //vehilcle.MoveToExit();
-                    vehilcle.OnVehicleExit();
-                }
-            });
-            //vehilcle.transform.DOPunchRotation(new Vector3(0, 0, 10), 0.4f, 10, 1);
-            this.gameObject.SetActive(false);
-            bookerAnim.SetBool(Running, false);
-            Debug.Log("Return Pool");
-            //Thêm vào pool
-            BookerManager.Instance.ReturnToPool(this);
-        });
-    }
+    //        vehilcle.transform.DOShakePosition(0.5f, 0.2f, 10, 90, false, true).OnComplete(() =>
+    //        {
+    //            if(vehilcle.bookerCount == vehilcle.maxSize && vehilcle.BookerSittingCount == vehilcle.bookerCount)
+    //            {
+    //                //VehicleLineManager.Instance.MoveToExit(vehilcle);
+    //                //vehilcle.MoveToExit();
+    //                vehilcle.OnVehicleExit();
+    //            }
+    //        });
+    //        //vehilcle.transform.DOPunchRotation(new Vector3(0, 0, 10), 0.4f, 10, 1);
+    //        this.gameObject.SetActive(false);
+    //        bookerAnim.SetBool(Running, false);
+    //        Debug.Log("Return Pool");
+    //        //Thêm vào pool
+    //        BookerManager.Instance.ReturnToPool(this);
+    //    });
+    //}
 
     public void MoveBookerToBus(Vehicle vehicle)
     {
@@ -151,6 +151,24 @@ public class Booker : MonoBehaviour
         targetVehicle.bookerCount++;
         bookerAnim.SetBool(Running, true);
 
+        // Khi 1 booker đi, cả hàng tiến lên
+        BookerLineManager.Instance.AllCharacterMoveInLine();
+
+        //if (!BookerManager.Instance.BookerColorQueueNotEmpty())
+        //{
+        //    Debug.Log("emptty");
+        //    return;
+        //}
+        //Debug.Log("not emptty");
+        //booker ra khỏi hàng
+        BookerManager.Instance.RemoveBookerInLine(this);
+        //Lấy booker trong pool
+        //GameColors cl = BookerManager.Instance.GetNextColorInQueue();
+        Booker _booker = BookerManager.Instance.GetBookerInPool();
+        //_booker.OnReach += BookerLineManager.Instance.HandleBookerReach;
+        //Thêm booker và0 cuối hàng
+        BookerLineManager.Instance.AddBookerToLastLine(_booker);
+
         // Di chuyển đến xe
         transform.DOMove(targetPos, 0.6f)
             .SetEase(Ease.Linear)
@@ -160,22 +178,23 @@ public class Booker : MonoBehaviour
                 BookerOnReachBus(vehicle); // callback riêng khi tới xe
             });
         
-        // Khi 1 booker đi, cả hàng tiến lên
-        BookerLineManager.Instance.AllCharacterMoveInLine();
+        //// Khi 1 booker đi, cả hàng tiến lên
+        //BookerLineManager.Instance.AllCharacterMoveInLine();
 
-        if (!BookerManager.Instance.BookerColorQueueNotEmpty())
-        {
-            Debug.Log("emptty");
-            return;
-        }
-        Debug.Log("not emptty");
-        //booker ra khỏi hàng
-        BookerManager.Instance.RemoveBookerInLine(this);
-        //Lấy booker trong pool
-        //GameColors cl = BookerManager.Instance.GetNextColorInQueue();
-        Booker _booker = BookerManager.Instance.GetBookerInPool();
-        //Thêm booker và0 cuối hàng
-        BookerLineManager.Instance.AddBookerToLastLine(_booker);
+        //if (!BookerManager.Instance.BookerColorQueueNotEmpty())
+        //{
+        //    Debug.Log("emptty");
+        //    return;
+        //}
+        //Debug.Log("not emptty");
+        ////booker ra khỏi hàng
+        //BookerManager.Instance.RemoveBookerInLine(this);
+        ////Lấy booker trong pool
+        ////GameColors cl = BookerManager.Instance.GetNextColorInQueue();
+        //Booker _booker = BookerManager.Instance.GetBookerInPool();
+        ////_booker.OnReach += BookerLineManager.Instance.HandleBookerReach;
+        ////Thêm booker và0 cuối hàng
+        //BookerLineManager.Instance.AddBookerToLastLine(_booker);
     }
 
     private void BookerOnReachBus(Vehicle vehicle)
@@ -183,7 +202,7 @@ public class Booker : MonoBehaviour
         if (vehicle == null) return;
 
         vehicle.transform.DOKill();
-        vehicle.bookerSittingCount++;
+        vehicle.BookerSittingCount++;
 
         //khi lên xe, số người còn lại giảm
         ManagerController.Instance.BookerRemaining--;
@@ -192,7 +211,7 @@ public class Booker : MonoBehaviour
         vehicle.transform.DOShakePosition(0.5f, 0.2f, 10, 90, false, true).OnComplete(() =>
         {
             // Khi xe đầy và mọi booker đã ngồi
-            if (vehicle.bookerSittingCount >= vehicle.maxSize && !vehicle.isLeaving)
+            if (vehicle.BookerSittingCount >= vehicle.maxSize && !vehicle.isLeaving)
             {
                 vehicle.isLeaving = true;
 

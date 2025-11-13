@@ -18,8 +18,28 @@ public class Vehicle : MonoBehaviour
 
     public bool Clicked;
     public int bookerCount = 0;
-    public int bookerSittingCount = 0;
+    [SerializeField] private int bookerSittingCount = 0;
+    public int BookerSittingCount
+    {
+        get
+        {
+            return bookerSittingCount;
+        }
+        set
+        {
+            if(bookerSittingCount != value)
+            {
+                bookerSittingCount = value;
+                if (Persons)
+                {
+                    Persons.GetChild(bookerSittingCount - 1).gameObject.SetActive(true);
+                }
+            }
+        }
+    }
     [SerializeField] public int maxSize = 3;
+
+    private Transform Persons;
 
     [Header("Move properties")]
     public float speed = 45f;            // tốc độ (đơn vị / giây)
@@ -114,7 +134,7 @@ public class Vehicle : MonoBehaviour
                     float hitDistance = h.distance;
 
                     // Giữ khoảng cách an toàn giữa 2 xe
-                    float stopOffset = 0.3f;
+                    float stopOffset = 0.03f;
                     float stopDistance = Mathf.Max(hitDistance - stopOffset, 0f);
 
                     // Vị trí dừng được tính từ vị trí ban đầu + hướng * khoảng cách
@@ -153,7 +173,9 @@ public class Vehicle : MonoBehaviour
                         .SetEase(Ease.Linear)
                         .OnComplete(() => 
                         {
-                            if(obstacle.name == "right" || obstacle.name == "left" || obstacle.name == "Top")
+                            this.transform.localScale = Vector3.one * 0.3f;
+
+                            if (obstacle.name == "right" || obstacle.name == "left" || obstacle.name == "Top")
                             {
                                 Vector3 target = stopPos;
                                 //di chuyển theo viền
@@ -273,6 +295,8 @@ public class Vehicle : MonoBehaviour
                 boxCollider = Vehicle_8.gameObject.GetComponent<BoxCollider>();
                 break;
         }
+
+        Persons = boxCollider.gameObject.transform.Find("Persons");
     }
 
 #if UNITY_EDITOR

@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.Data;
+using System.Collections.Generic;
+
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -9,6 +11,24 @@ using System.IO;
 public class SaveData : MonoBehaviour
 {
     public LevelDataSO dataAsset;
+
+    private Dictionary<GameColors, Vehicle> DictType;
+    [Header("Bus prefabs")]
+    [SerializeField] private BusContainer busContainer;
+
+    private void Start()
+    {
+        //SetDictTypeOfBus();
+    }
+
+    void SetDictTypeOfBus()
+    {
+        DictType = new Dictionary<GameColors, Vehicle>();
+        foreach (var x in busContainer.busCatalog)
+        {
+            DictType[x.busColor] = x.bus;
+        }
+    }
 
 #if UNITY_EDITOR
     public  void SaveNew()
@@ -80,6 +100,33 @@ public class SaveData : MonoBehaviour
         EditorUtility.SetDirty(dataAsset);
         AssetDatabase.SaveAssets();
         Debug.Log($"Đã ghi đè dữ liệu vào {AssetDatabase.GetAssetPath(dataAsset)} ({dataAsset.VehicleColorMap.Count} object)");
+    }
+
+    public void LoadLevel()
+    {
+        SetDictTypeOfBus();
+
+        foreach (var v in dataAsset.VehicleColorMap)
+        {
+            Vehicle newVehicle;
+            var initialPos = v.position;
+            var initialRotation = v.rotation;
+            var initialColor = v.gameColors;
+            int _maxSize = v.maxSizeCount;
+            if (_maxSize == 0) _maxSize = 4;
+
+            newVehicle = Instantiate(DictType[initialColor], initialPos, initialRotation, transform);
+            newVehicle.maxSize = _maxSize;
+            newVehicle.SetTypeVehicle(_maxSize);
+        }
+    }
+
+    public void Clearr()
+    {
+        foreach (Transform child in transform)
+        {
+            DestroyImmediate(child.gameObject);
+        }
     }
 #endif
 }
