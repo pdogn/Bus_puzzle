@@ -110,16 +110,25 @@ public class Vehicle : MonoBehaviour
                 // 🚗 Nếu trúng xe khác
                 if (obstacle.CompareTag("Vehicle"))
                 {
-                    Vector3 hitPoint = h.point - dir * 1f; // lùi lại một chút để không chồng collider
-                    float distance = Vector3.Distance(transform.position, hitPoint);
-                    float duration = distance / speed;
+                    // Khoảng cách thật sự đến xe trước (theo hướng dir)
+                    float hitDistance = h.distance;
 
-                    moveTween = transform.DOMove(hitPoint, duration)
+                    // Giữ khoảng cách an toàn giữa 2 xe
+                    float stopOffset = 0.3f;
+                    float stopDistance = Mathf.Max(hitDistance - stopOffset, 0f);
+
+                    // Vị trí dừng được tính từ vị trí ban đầu + hướng * khoảng cách
+                    Vector3 hitStopPos = transform.position + dir * stopDistance;
+                    hitStopPos.y = transform.position.y; // giữ nguyên độ cao
+
+                    float duration = stopDistance / speed;
+
+                    moveTween = transform.DOMove(hitStopPos, duration)
                         .SetEase(Ease.OutQuad)
                         .OnComplete(() =>
                         {
                             ImpactOtherVehicle(obstacle, 10f);
-                            DOVirtual.DelayedCall(0.1f, () =>  // dừng 0.1 giây
+                            DOVirtual.DelayedCall(0.2f, () =>  // dừng 0.2 giây
                             {
                                 // Quay về vị trí cũ
                                 transform.DOMove(startPos, duration)
@@ -127,7 +136,7 @@ public class Vehicle : MonoBehaviour
                             });
                         });
 
-                    Debug.DrawLine(transform.position, hitPoint, Color.yellow, 2f);
+                    Debug.DrawLine(transform.position, hitStopPos, Color.red, 2f);
                     return;
                 }
 
